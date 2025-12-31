@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-12-31
+
+### 🎉 First Stable Release
+
+This is the first fully tested and stable release of mc-installer.
+
+### Fixed
+- Install script download URL now uses correct repository name (minecraft-fedora-installer)
+
+### Changed
+- Marked as stable release - all core features tested and working
+- Production-ready binaries with proper versioning
+
+### Features
+- Per-user installation to standard XDG directories
+- Automatic GPU detection (AMD/Intel/NVIDIA with proper Mesa configuration)
+- Desktop integration with application menu and icon
+- Self-contained static binaries (no dependencies)
+- One-line installation via curl script
+- Multi-architecture support (AMD64 and ARM64)
+- Idempotent installation (safe to re-run)
+- Command-line options: `--help`, `--version`, `--force`
+
 ## [0.3.4] - 2025-12-31
 
 ### Fixed
@@ -70,7 +93,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Desktop file: `~/.local/share/applications/minecraft.desktop`
 - Icon: `~/.local/share/icons/minecraft.png`
 
-[Unreleased]: https://github.com/mj41/mc-desktop/compare/v0.3.4...HEAD
+[Unreleased]: https://github.com/mj41/mc-desktop/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/mj41/mc-desktop/compare/v0.3.4...v0.4.0
 [0.3.4]: https://github.com/mj41/mc-desktop/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/mj41/mc-desktop/compare/v0.3.1...v0.3.3
 [0.3.2]: https://github.com/mj41/mc-desktop/compare/v0.3.1...v0.3.2
