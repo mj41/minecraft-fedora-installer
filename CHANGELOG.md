@@ -7,16 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.2] - 2025-12-31
+## [0.3.3] - 2025-12-31
 
 ### Fixed
 - GitHub Actions build workflow timeouts
 - Git ownership issues in containerized builds
+- Code corruption issues in main.go
 
 ### Changed
 - Simplified build process: now builds on Ubuntu instead of Fedora container
 - Faster CI/CD pipeline (no container overhead)
 - Static binaries remain compatible with all Linux distributions including Fedora 43+
+
+### Documentation
+- Updated man page to v0.3.3
+- Clarified GPU detection in documentation
+- Added quick install instructions to release template
+
+## [0.3.2] - 2025-12-31
+
+### Status
+- Not released (skipped due to build issues)
 
 ## [0.3.1] - 2025-12-31
 
@@ -51,7 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Desktop file: `~/.local/share/applications/minecraft.desktop`
 - Icon: `~/.local/share/icons/minecraft.png`
 
-[Unreleased]: https://github.com/mj41/mc-desktop/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/mj41/mc-desktop/compare/v0.3.3...HEAD
+[0.3.3]: https://github.com/mj41/mc-desktop/compare/v0.3.1...v0.3.3
 [0.3.2]: https://github.com/mj41/mc-desktop/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/mj41/mc-desktop/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/mj41/mc-desktop/releases/tag/v0.3.0

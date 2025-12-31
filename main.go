@@ -355,26 +355,27 @@ func installIcon(paths *InstallPaths, force bool) error {
 	var srcIcon string
 	for _, icon := range possibleIcons {
 		if _, err := os.Stat(icon); err == nil {
-	// Detect GPU and determine Exec line
-	gpuType := detectGPU()
-	execPath := filepath.Join(paths.OptDir, "minecraft-launcher")
+			// Detect GPU and determine Exec line
+			gpuType := detectGPU()
+			execPath := filepath.Join(paths.OptDir, "minecraft-launcher")
 
-	var execLine string
-	if gpuType == "nvidia" {
-		// NVIDIA proprietary: no Mesa override
-		execLine = execPath
-	} else {
-		// AMD/Intel/Nouveau: use Mesa
-		execLine = fmt.Sprintf("env __GLX_VENDOR_LIBRARY_NAME=mesa %s", execPath)
-	}
+			var execLine string
+			if gpuType == "nvidia" {
+				// NVIDIA proprietary: no Mesa override
+				execLine = execPath
+			} else {
+				// AMD/Intel/Nouveau: use Mesa
+				execLine = fmt.Sprintf("env __GLX_VENDOR_LIBRARY_NAME=mesa %s", execPath)
+			}
 
-	content := fmt.Sprintf(desktopTemplate, execLine
-			break
+			content := fmt.Sprintf(desktopTemplate, execLine, paths.IconFile)
+
+			if err := os.WriteFile(paths.DesktopFile, []byte(content), 0644); err != nil {
+				return fmt.Errorf("failed to write desktop file: %w", err)
+			}
+
+			return nil
 		}
-	}
-
-	if srcIcon == "" {
-		return fmt.Errorf("no icon found (neither embedded nor in extracted files)")
 	}
 
 	fmt.Printf("Copying icon from: %s\n", srcIcon)
@@ -406,7 +407,20 @@ func createDesktopFile(paths *InstallPaths, force bool) error {
 
 	fmt.Printf("Creating desktop file: %s\n", paths.DesktopFile)
 
-	content := fmt.Sprintf(desktopTemplate, paths.OptDir, paths.IconFile)
+	// Detect GPU and determine Exec line
+	gpuType := detectGPU()
+	execPath := filepath.Join(paths.OptDir, "minecraft-launcher")
+
+	var execLine string
+	if gpuType == "nvidia" {
+		// NVIDIA proprietary: no Mesa override
+		execLine = execPath
+	} else {
+		// AMD/Intel/Nouveau: use Mesa
+		execLine = fmt.Sprintf("env __GLX_VENDOR_LIBRARY_NAME=mesa %s", execPath)
+	}
+
+	content := fmt.Sprintf(desktopTemplate, execLine, paths.IconFile)
 
 	if err := os.WriteFile(paths.DesktopFile, []byte(content), 0644); err != nil {
 		return fmt.Errorf("failed to write desktop file: %w", err)

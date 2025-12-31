@@ -1,4 +1,4 @@
-.TH MC-INSTALLER 1 "December 2025" "mc-installer 0.3.0" "User Commands"
+.TH MC-INSTALLER 1 "December 2025" "mc-installer 0.3.3" "User Commands"
 .SH NAME
 mc-installer \- Minecraft Launcher installer for Fedora Linux
 .SH SYNOPSIS
@@ -74,7 +74,8 @@ Temporary download file (automatically cleaned up)
 .SH ENVIRONMENT
 .TP
 .B __GLX_VENDOR_LIBRARY_NAME
-Set to "mesa" when launching Minecraft for Fedora compatibility
+Automatically set to "mesa" for AMD/Intel/Nouveau GPUs. Not set for NVIDIA proprietary drivers.
+GPU detection is automatic using lspci.
 .SH EXIT STATUS
 .TP
 .B 0
