@@ -56,30 +56,27 @@ git push origin v0.3.0
 Once you push the tag, GitHub Actions will automatically:
 
 1. Trigger the release workflow (`.github/workflows/release.yml`)
-2. Build binaries on Fedora 43 for both architectures:
+2. Build static binaries on Ubuntu using Go 1.23 for both architectures:
    - `mc-installer-amd64` (x86_64)
    - `mc-installer-arm64` (ARM64)
 3. Embed version information via ldflags:
-   - Version: from the git tag (e.g., `v1.0.0`)
+   - Version: from the git tag (e.g., `v0.3.4`)
    - Git commit: short commit hash
    - Build date: UTC timestamp
-4. Upload binaries as release assets
+4. Upload binaries to the release using official GitHub CLI (`gh`)
 
 ### 4. Create GitHub Release
 
 After the workflow completes:
 
-1. Go to https://github.com/mj41/mc-desktop/releases
+1. Go to https://github.com/mj41/minecraft-fedora-installer/releases
 2. Click "Draft a new release"
-3. Select the tag you just created (e.g., `v0.3.0`)
-4. The release notes will be pre-filled from `.github/RELEASE_TEMPLATE.md`
-5. Update the template with actual changes:
-   - Fill in new features, improvements, bug fixes
-   - Update version-specific information
-6. The binaries will already be attached automatically
-7. Click "Publish release"
+3. Select the tag you just created (e.g., `v0.3.4`)
+4. Copy release notes from `temp/release-notes/vX.Y.Z.md`
+5. The binaries will already be attached automatically by the workflow
+6. Click "Publish release"
 
-Note: GitHub automatically uses `.github/RELEASE_TEMPLATE.md` when creating releases.
+Note: Release notes templates are stored in `temp/release-notes/` directory.
 
 ## Version Numbering
 

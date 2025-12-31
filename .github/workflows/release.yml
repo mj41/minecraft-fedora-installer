@@ -4,6 +4,9 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Binary
@@ -35,11 +38,7 @@ jobs:
             -o mc-installer-${{ matrix.arch }} main.go
 
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./mc-installer-${{ matrix.arch }}
-          asset_name: mc-installer-${{ matrix.arch }}
-          asset_content_type: application/octet-stream
+        run: |
+          gh release upload ${{ github.ref_name }} mc-installer-${{ matrix.arch }} --clobber
