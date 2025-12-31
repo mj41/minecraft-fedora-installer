@@ -1,0 +1,46 @@
+name: Build and Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build Binary
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:43
+    strategy:
+      matrix:
+        arch: [amd64, arm64]
+
+    steps:
+      - name: Install dependencies
+        run: |
+          dnf install -y golang git
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build static binary
+        env:
+          CGO_ENABLED: 0
+          GOOS: linux
+          GOARCH: ${{ matrix.arch }}
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          GIT_COMMIT=$(git rev-parse --short HEAD)
+          go build -v \
+            -ldflags="-s -w -X main.Version=${VERSION} -X main.GitCommit=${GIT_COMMIT} -X main.BuildDate=${BUILD_DATE}" \
+            -o mc-installer-${{ matrix.arch }} main.go
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./mc-installer-${{ matrix.arch }}
+          asset_name: mc-installer-${{ matrix.arch }}
+          asset_content_type: application/octet-stream

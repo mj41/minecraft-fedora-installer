@@ -70,6 +70,7 @@ make runto `/tmp/` (skipped if already present)
 ## Command-Line Options
 
 - `--help` - Show help message and installation paths
+- `--version` - Show version information
 - `--force` - Force reinstallation even if already installed
 
 ## What it does
@@ -96,3 +97,16 @@ rm -rf ~/opt/minecraft-launcher
 rm ~/.local/share/applications/minecraft.desktop
 rm ~/.local/share/icons/minecraft.png
 ```
+
+## Documentation
+
+- [Release Process](docs/dev/release.md) - How to create new releases
+- [Man Page](docs/mc-installer.1) - Manual page (can be viewed with `man docs/mc-installer.1`)
+- [Changelog](CHANGELOG.md) - Version history and changes
+
+## Contributing
+
+Contributions are welcome! Please ensure:
+- Desktop file passes validation: `desktop-file-validate minecraft.desktop.tmpl`
+- CHANGELOG.md is updated for notable changes
+- Follow existing code style

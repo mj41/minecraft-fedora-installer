@@ -23,6 +23,13 @@ var embeddedIcon []byte
 //go:embed minecraft.desktop.tmpl
 var desktopTemplate string
 
+// Version information (set via ldflags during build)
+var (
+	Version   = "dev"
+	GitCommit = "unknown"
+	BuildDate = "unknown"
+)
+
 const (
 	// Download URL for Minecraft launcher
 	minecraftURL = "https://launcher.mojang.com/download/Minecraft.tar.gz"
@@ -58,16 +65,26 @@ func main() {
 	// Parse command-line flags
 	force := flag.Bool("force", false, "Force reinstallation even if already installed")
 	help := flag.Bool("help", false, "Show help message")
+	version := flag.Bool("version", false, "Show version information")
 	flag.Parse()
+
+	if *version {
+		fmt.Printf("mc-installer version %s\n", Version)
+		fmt.Printf("Git commit: %s\n", GitCommit)
+		fmt.Printf("Build date: %s\n", BuildDate)
+		return
+	}
 
 	if *help {
 		fmt.Println("Minecraft Launcher Installer for Fedora Linux")
+		fmt.Printf("Version: %s\n", Version)
 		fmt.Println()
 		fmt.Println("Usage: mc-installer [options]")
 		fmt.Println()
 		fmt.Println("Options:")
-		fmt.Println("  --force    Force reinstallation even if already installed")
-		fmt.Println("  --help     Show this help message")
+		fmt.Println("  --force      Force reinstallation even if already installed")
+		fmt.Println("  --help       Show this help message")
+		fmt.Println("  --version    Show version information")
 		fmt.Println()
 		fmt.Println("Installation locations (per-user):")
 		fmt.Println("  Application:   ~/opt/minecraft-launcher/")

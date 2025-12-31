@@ -1,0 +1,107 @@
+.TH MC-INSTALLER 1 "December 2025" "mc-installer 0.3.0" "User Commands"
+.SH NAME
+mc-installer \- Minecraft Launcher installer for Fedora Linux
+.SH SYNOPSIS
+.B mc-installer
+[\fB\-\-help\fR]
+[\fB\-\-version\fR]
+[\fB\-\-force\fR]
+.SH DESCRIPTION
+.B mc-installer
+is a simple installer for the Minecraft launcher on Fedora Linux.
+It performs a per-user installation without requiring root privileges.
+.PP
+The installer downloads the official Minecraft launcher from Mojang,
+extracts it to the user's home directory, and creates desktop integration
+files for easy access from the application menu.
+.SH OPTIONS
+.TP
+.BR \-\-help
+Display help message and installation paths
+.TP
+.BR \-\-version
+Show version information including Git commit and build date
+.TP
+.BR \-\-force
+Force reinstallation even if Minecraft launcher is already installed
+.SH INSTALLATION LOCATIONS
+The installer uses standard XDG Base Directory locations:
+.TP
+.I ~/opt/minecraft-launcher/
+Main application directory containing the Minecraft launcher executable
+.TP
+.I ~/.local/share/applications/minecraft.desktop
+Desktop entry file for application menu integration
+.TP
+.I ~/.local/share/icons/minecraft.png
+Application icon
+.SH FEATURES
+.IP \(bu 2
+No root/sudo required (per-user installation)
+.IP \(bu 2
+Automatic download from Mojang's official source
+.IP \(bu 2
+Desktop integration with application menu
+.IP \(bu 2
+Mesa workaround for Fedora compatibility
+.IP \(bu 2
+Idempotent installation (skips completed steps)
+.IP \(bu 2
+Self-contained binary with embedded resources
+.SH EXAMPLES
+.TP
+Install Minecraft launcher:
+.B mc-installer
+.TP
+Show version information:
+.B mc-installer \-\-version
+.TP
+Force reinstallation:
+.B mc-installer \-\-force
+.SH FILES
+.TP
+.I ~/opt/minecraft-launcher/minecraft-launcher
+Main Minecraft launcher executable
+.TP
+.I ~/.local/share/applications/minecraft.desktop
+Desktop entry file
+.TP
+.I ~/.local/share/icons/minecraft.png
+Application icon
+.TP
+.I /tmp/minecraft-launcher.tar.gz
+Temporary download file (automatically cleaned up)
+.SH ENVIRONMENT
+.TP
+.B __GLX_VENDOR_LIBRARY_NAME
+Set to "mesa" when launching Minecraft for Fedora compatibility
+.SH EXIT STATUS
+.TP
+.B 0
+Successful installation or help/version display
+.TP
+.B 1
+Installation error (permission denied, download failed, etc.)
+.SH UNINSTALLATION
+To remove Minecraft launcher:
+.PP
+.nf
+.RS
+rm -rf ~/opt/minecraft-launcher
+rm ~/.local/share/applications/minecraft.desktop
+rm ~/.local/share/icons/minecraft.png
+.RE
+.fi
+.SH BUGS
+Report bugs at: https://github.com/mj41/mc-desktop/issues
+.SH AUTHOR
+Written by mj41
+.SH COPYRIGHT
+See LICENSE file in the source distribution
+.SH SEE ALSO
+.BR desktop-file-validate (1),
+.BR desktop-file-install (1)
+.PP
+Minecraft official website: https://www.minecraft.net/
+.PP
+Full documentation: https://github.com/mj41/mc-desktop
