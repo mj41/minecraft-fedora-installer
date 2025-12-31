@@ -35,6 +35,21 @@ These are the standard XDG Base Directory locations for per-user installations.
 
 ## Download Pre-built Binary
 
+### Quick Install (Recommended)
+
+One-line install - downloads and runs the installer automatically:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/mj41/mc-desktop/main/install.sh | bash
+```
+
+For force reinstall:
+```bash
+curl -fsSL https://raw.githubusercontent.com/mj41/mc-desktop/main/install.sh | bash -s -- --force
+```
+
+### Manual Download
+
 Download the latest release from GitHub:
 
 ```bash
@@ -71,12 +86,11 @@ make build
 ./mc-installer --force
 
 # Using make
-make runto `/tmp/` (skipped if already present)
-3. Extracts the launcher to `~/opt/minecraft-launcher/` (strips top-level directory from archive)
-4. Installs the embedded icon to `~/.local/share/icons/minecraft.png`
-5. Creates a `.desktop` file in `~/.local/share/applications/minecraft.desktop` from embedded template
-6. Cleans up temporary download file
-7he compiled binary is fully self-contained with the icon and desktop template embedded. You can distribute just the `mc-installer` executable.
+make run
+make run-force
+```
+
+The compiled binary is fully self-contained with the icon and desktop template embedded. You can distribute just the `mc-installer` executable.
 
 ## Command-Line Options
 
@@ -86,12 +100,14 @@ make runto `/tmp/` (skipped if already present)
 
 ## What it does
 
-1. Creates the necessary directories (`~/opt/minecraft-launcher/`, `~/.local/share/applications/`, `~/.local/share/icons/`)
-2. Downloads from https://launcher.mojang.com/download/Minecraft.tar.gz (skipped if already present)
-3. Extracts the launcher to `~/opt/minecraft-launcher/`
-4. Installs the embedded icon to `~/.local/share/icons/minecraft.png`
-5. Creates a `.desktop` file in `~/.local/share/applications/minecraft.desktop` with embedded template
-6. After installation, Minecraft will appear in your application menu
+1. Detects your GPU type (AMD/Intel/NVIDIA)
+2. Creates the necessary directories (`~/opt/minecraft-launcher/`, `~/.local/share/applications/`, `~/.local/share/icons/`)
+3. Downloads from https://launcher.mojang.com/download/Minecraft.tar.gz to `/tmp/` (skipped if already present)
+4. Extracts the launcher to `~/opt/minecraft-launcher/` (strips top-level directory from archive)
+5. Installs the embedded icon to `~/.local/share/icons/minecraft.png`
+6. Creates a `.desktop` file with GPU-specific configuration
+7. Cleans up temporary download file
+8. After installation, Minecraft will appear in your application menu
 
 The installer will skip steps if already completed, unless `--force` is specified.
 

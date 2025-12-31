@@ -12,3 +12,6 @@ go.work
 
 # Downloaded files
 *.tar.gz
+
+# Temp dir
+/temp/*
