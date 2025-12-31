@@ -2,6 +2,8 @@
 
 A simple Go application to install the Minecraft launcher per-user on Fedora Linux. Downloads, extracts, and configures the official Minecraft launcher with desktop integration.
 
+![Minecraft in Application Menu](docs/imgs/desktop-integration.png)
+
 ## Features
 
 - **No root required**: Per-user installation to standard XDG directories
