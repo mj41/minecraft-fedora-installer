@@ -34,7 +34,7 @@ echo -e "Downloading: ${GREEN}$BINARY${NC}"
 echo
 
 # Download URL
-DOWNLOAD_URL="https://github.com/mj41/mc-desktop/releases/latest/download/$BINARY"
+DOWNLOAD_URL="https://github.com/mj41/minecraft-fedora-installer/releases/latest/download/$BINARY"
 TEMP_FILE="/tmp/$BINARY"
 
 # Download the binary
