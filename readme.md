@@ -40,12 +40,12 @@ These are the standard XDG Base Directory locations for per-user installations.
 One-line install - downloads and runs the installer automatically:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/mj41/mc-desktop/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mj41/minecraft-fedora-installer/refs/heads/main/install.sh | bash
 ```
 
 For force reinstall:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/mj41/mc-desktop/main/install.sh | bash -s -- --force
+curl -fsSL https://raw.githubusercontent.com/mj41/minecraft-fedora-installer/refs/heads/main/install.sh | bash -s -- --force
 ```
 
 ### Manual Download

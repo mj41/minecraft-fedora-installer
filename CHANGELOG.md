@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub Actions build workflow timeouts
 - Git ownership issues in containerized builds
 - Code corruption issues in main.go
+- Install script URL in documentation (updated to use correct repository name)
 
 ### Changed
 - Simplified build process: now builds on Ubuntu instead of Fedora container
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated man page to v0.3.3
 - Clarified GPU detection in documentation
 - Added quick install instructions to release template
+- Fixed install.sh URL across all documentation
 
 ## [0.3.2] - 2025-12-31
 

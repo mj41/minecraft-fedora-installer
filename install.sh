@@ -1,6 +1,6 @@
 #!/bin/bash
 # Minecraft Launcher Installer - Quick Install Script
-# Usage: curl -fsSL https://raw.githubusercontent.com/mj41/mc-desktop/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/mj41/minecraft-fedora-installer/refs/heads/main/install.sh | bash
 
 set -e
 
