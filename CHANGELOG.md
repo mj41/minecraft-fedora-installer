@@ -13,13 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Per-user installation to standard XDG directories
 - Automatic download of Minecraft launcher from Mojang
 - Desktop integration with application menu and icon
-- Mesa workaround for Fedora compatibility (`__GLX_VENDOR_LIBRARY_NAME=mesa`)
+- Automatic GPU detection (AMD/Intel/NVIDIA) with appropriate configuration
 - Idempotent installation (skips already completed steps)
 - Self-contained binary with embedded icon and desktop template
 - Multi-architecture support (AMD64 and ARM64)
 - Command-line options: `--help`, `--version`, `--force`
 - Automatic cleanup of temporary download files
 - GitHub Actions workflow for automated builds on Fedora 43
+
+### Technical Details
+- Uses `lspci` to detect GPU type
+- AMD/Intel/Nouveau GPUs: configured with `__GLX_VENDOR_LIBRARY_NAME=mesa`
+- NVIDIA proprietary drivers: configured without Mesa override
 
 ### Installation Locations
 - Application: `~/opt/minecraft-launcher/`

@@ -7,10 +7,21 @@ A simple Go application to install the Minecraft launcher per-user on Fedora Lin
 - **No root required**: Per-user installation to standard XDG directories
 - **Automatic download**: Fetches the latest launcher from Mojang
 - **Desktop integration**: Adds launcher to application menu with icon
-- **Mesa workaround**: Includes `__GLX_VENDOR_LIBRARY_NAME=mesa` for Fedora compatibility
+- **Auto GPU detection**: Automatically configures for AMD/Intel/NVIDIA GPUs
 - **Idempotent**: Skips already completed steps unless `--force` is used
 - **Self-contained binary**: Icon and desktop template embedded at build time
 - **Multi-architecture**: Pre-built binaries for AMD64 and ARM64
+
+## GPU Compatibility
+
+The installer **automatically detects your GPU** and configures the desktop file accordingly:
+
+- ✅ **AMD GPUs** (Radeon) - Configured with Mesa
+- ✅ **Intel GPUs** - Configured with Mesa
+- ✅ **NVIDIA proprietary drivers** - Configured without Mesa override
+- ✅ **NVIDIA Nouveau** (open source) - Configured with Mesa
+
+No manual configuration needed! The installer uses `lspci` to detect your GPU type.
 
 ## Per-User Installation Locations
 

@@ -13,6 +13,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 )
@@ -157,6 +158,44 @@ func isAlreadyInstalled(paths *InstallPaths) bool {
 	}
 
 	return true
+}
+
+func detectGPU() string {
+	// Try to detect GPU using lspci
+	cmd := exec.Command("lspci")
+	output, err := cmd.Output()
+	if err != nil {
+		// If lspci fails, assume Mesa is safe default
+		return "mesa"
+	}
+
+	outputStr := strings.ToLower(string(output))
+
+	// Check for NVIDIA with proprietary driver
+	if strings.Contains(outputStr, "nvidia") {
+		// Check if nvidia kernel module is loaded (indicates proprietary driver)
+		if _, err := os.Stat("/sys/module/nvidia"); err == nil {
+			fmt.Println("Detected NVIDIA GPU with proprietary driver")
+			return "nvidia"
+		}
+		// Nouveau (open source NVIDIA driver) uses Mesa
+		fmt.Println("Detected NVIDIA GPU with Nouveau driver")
+		return "mesa"
+	}
+
+	// AMD and Intel use Mesa
+	if strings.Contains(outputStr, "amd") || strings.Contains(outputStr, "radeon") {
+		fmt.Println("Detected AMD GPU")
+		return "mesa"
+	}
+
+	if strings.Contains(outputStr, "intel") {
+		fmt.Println("Detected Intel GPU")
+		return "mesa"
+	}
+
+	// Default to Mesa for unknown GPUs
+	return "mesa"
 }
 
 func createDirectories(paths *InstallPaths) error {
@@ -316,7 +355,20 @@ func installIcon(paths *InstallPaths, force bool) error {
 	var srcIcon string
 	for _, icon := range possibleIcons {
 		if _, err := os.Stat(icon); err == nil {
-			srcIcon = icon
+	// Detect GPU and determine Exec line
+	gpuType := detectGPU()
+	execPath := filepath.Join(paths.OptDir, "minecraft-launcher")
+
+	var execLine string
+	if gpuType == "nvidia" {
+		// NVIDIA proprietary: no Mesa override
+		execLine = execPath
+	} else {
+		// AMD/Intel/Nouveau: use Mesa
+		execLine = fmt.Sprintf("env __GLX_VENDOR_LIBRARY_NAME=mesa %s", execPath)
+	}
+
+	content := fmt.Sprintf(desktopTemplate, execLine
 			break
 		}
 	}
