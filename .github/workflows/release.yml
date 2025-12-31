@@ -8,19 +8,18 @@ jobs:
   build:
     name: Build Binary
     runs-on: ubuntu-latest
-    container:
-      image: fedora:43
     strategy:
       matrix:
         arch: [amd64, arm64]
 
     steps:
-      - name: Install dependencies
-        run: |
-          dnf install -y golang git
-
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
 
       - name: Build static binary
         env:

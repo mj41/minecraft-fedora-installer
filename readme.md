@@ -64,7 +64,7 @@ chmod +x mc-installer-arm64
 ./mc-installer-arm64
 ```
 
-Binaries are built on Fedora 43 for maximum compatibility.
+Binaries are built with Go 1.23 as static executables - compatible with all Linux distributions including Fedora 43+.
 
 ## Build and Run
 
