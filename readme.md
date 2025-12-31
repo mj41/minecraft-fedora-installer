@@ -56,12 +56,12 @@ Download the latest release from GitHub:
 
 ```bash
 # For AMD64/x86_64 systems (most common)
-wget https://github.com/mj41/mc-desktop/releases/latest/download/mc-installer-amd64
+wget https://github.com/mj41/minecraft-fedora-installer/releases/latest/download/mc-installer-amd64
 chmod +x mc-installer-amd64
 ./mc-installer-amd64
 
 # For ARM64 systems
-wget https://github.com/mj41/mc-desktop/releases/latest/download/mc-installer-arm64
+wget https://github.com/mj41/minecraft-fedora-installer/releases/latest/download/mc-installer-arm64
 chmod +x mc-installer-arm64
 ./mc-installer-arm64
 ```
